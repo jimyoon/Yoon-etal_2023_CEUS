@@ -1,41 +1,24 @@
 [![DOI](https://zenodo.org/badge/265119113.svg)](https://zenodo.org/badge/latestdoi/265119113)
 
-# metarepo
-Template repository for a single point of access meta-repository to reproduce an experiment
+# Yoon et al., 2023 CEUS
+**Structural model choices regularly overshadow parametric uncertainty in agent-based simulations of household flood risk outcomes.**
 
-## Purpose
-A meta-repository creates a single point of access for someone to find all of the components that were used to create a published work for the purpose of reproducibility.  This repository should contain references to all minted data and software as well as house any ancillary code used to transform the source data, create figures for your publication, conduct the experiment, and / or execute the contributing software.
+Jim Yoon*, Heng Wan, Brent Daniel, Vivek Srikrishnan, David Judi
 
-## Using the template
-Simply click `Use this template` on the main repository page (shows up to the left of `Clone or download`) and fill in your `Repository name`, the `Description`, select whether you want the repository to be `Public` or `Private`, and leave `Include all branches` unchecked.
+\* corresponding author:  jim.yoon@pnnl.gov
 
-## Naming your meta-repository
-The following naming conventions should be used when naming your repository:  
-- Single author:  `lastname_year_journal`
-- Multi author:  `lastname-etal_year_journal`
-- Multiple publications in the same journal:  `lastname-etal_year-letter_journal` (e.g., `human-etal_2020-b_nature`)
+## Abstract
+Agent-based models (ABMs) have been increasingly used for flood risk analysis, driven by the recognition that commonly used analyses typically neglect adaptive human behavior in relation to flood hazards. However, ABM simulation results can be highly sensitive to a number of modeling choices. Here, we introduce an agent-based modeling framework to explore the impact of structural versus parametric choices of household flood aversion on modeled outcomes of flood risk in a hypothetical urban environment. We deploy three structural variants of the model that fundamentally differ in the manner in which households are assumed to interface with flood hazards (disamenity, avoidance, and protection), evaluating multiple model parameterizations within each structural variant. The structural variants lead to fundamentally different conclusions regarding the evolution of flood risk, indicating that the structural choices made regarding human representation in flood risk ABMs have substantial bearing on modeling insights and ought to be elevated from an overlooked to a critical aspect of future modeling efforts.
 
-## Customize your `.gitignore` file
-A general `.gitignore` for use with Python or R development is included.  However, you may wish to customize this to the needs of your project.  The `.gitignore` file lets Git know what to push to the remote repository and what needs to be ignored and stay local.
+## Contributing modeling software
+| Model | Version | Repository Link |
+|-------|---------|-----------------|-----|
+| CHANCE-C | 1.0 | https://github.com/jimyoon/icom_abm |
 
-## Suggestions
-- Don't bog down your repository with a bunch of raw data.  Instead archive and mint a DOI for your data and provide the reference in this repository with instructions for use.
-- Create complete and tested documentation for how to use what is in this repository to reproduce your experiment.
-
-## Creating a minted release for your meta-repository
-It is important to version and release your meta-repository as well due to changes that may occur during the publication review process.  If you do not know how to conduct a release on GitHub when linked with Zenodo, please contact chris.vernon@pnnl.gov to get set up.  
-
-## The meta-repository markdown template
-A sample meta-repository template is provided in this repository in the file `metarepo_template.md`.  
-
-To use it, do the following:
-1. Create the template repository as mentioned above in [Using the template](#using-the-template)
-2. Clone your new repository to you local machine
-3. Change directories into your new meta-repository directory you just cloned
-4. Run `git rm README.md` to delete this file (`README.md`) and commit it using `git commit -m 'remove instructions'`
-5. Rename `metarepo_template.md` as `README.md`
-6. Run `git add README.md` to stage the new file that will show up on load in your remote GitHub repository
-7. Run `git rm metarepo_template.md` to remove the original template
-8. Run `git commit -m 'set up new template as readme'` to set the changes
-9. Run `git push` to send the changes to your remote GitHub repository
-10. Modify the `README.md` file to represent your experiement and use the `add`, `commit`, `push` workflow to update your remote repository
+## Reproducing my workflow
+__1.__ The scripts used for the simulations presented in the publication are stored in the github repo above in the constance_runs/20230322_CEUS_Publication directory
+__2.__ Run the abm_baltimore_example_CEUS2023.py script conduct a model simulation on a local machine. Model run and scenario options can be modified directly in the code to define structural/parametric variant options and scenario conditions (e.g., population growth rate)
+__3.__ For the ensemble of model runs presented in the manuscript, the model is deployed on an HPC via the Slurm workload manager. A customized job script (icom_batch_CEUS2023.txt) and Python script for batch simulation (abm_baltimore_example_PIC_slurm_CEUS2023.py) are provided in the github repo
+__4.__ A successful model run results in a set of output files at the block group (e.g., "results_utility_") and at the agent level (e.g., "hh_results_utility_").
+__5.__ The model outputs from step 4 above are processed through various segments of the "post_processing_examples_CEUS2023.py" file to generate the figures for Figures 2-4 of the manuscript. The figures generated via the script are subsequently touched up in Inkscape for final publication.
+__6.__ The agent level outputs are processed through Raw Graphs (https://app.rawgraphs.io/) to generate the alluvial diagrams in Figure 5. Final touch-ups are implemented in Inkscape.
