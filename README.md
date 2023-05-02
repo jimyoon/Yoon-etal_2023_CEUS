@@ -14,14 +14,14 @@ Agent-based models (ABMs) have been increasingly used for flood risk analysis, d
 | CHANCE-C | 1.0 | https://github.com/jimyoon/icom_abm |
 
 ## Reproducing my workflow
-__1.__ The scripts used for the simulations presented in the publication are stored in the github repo above in the constance_runs/20230322_CEUS_Publication directory.
+__1.__ The scripts used for the simulations presented in the publication are stored in the github repo above in the constance_runs/20230322_CEUS_Publication directory. All raw model outputs from the various simulations are stored in the constance_runs/20230322_CEUS_Publication/pop_01 and constance_runs/20230322_CEUS_Publication/pop_02 directories.
 
-__2.__ Run the abm_baltimore_example_CEUS2023.py script conduct a model simulation on a local machine. Model run and scenario options can be modified directly in the code to define structural/parametric variant options and scenario conditions (e.g., population growth rate).
+__2.__ To run the model on a local machine, use the abm_baltimore_example_CEUS2023.py script. Model run and scenario options can be modified directly in the code to define structural/parametric variant options and scenario conditions (e.g., population growth rate).
 
-__3.__ For the ensemble of model runs presented in the manuscript, the model is deployed on an HPC via the Slurm workload manager. A customized job script (icom_batch_CEUS2023.txt) and Python script for batch simulation (abm_baltimore_example_PIC_slurm_CEUS2023.py) are provided in the github repo.
+__3.__ For the ensemble of model runs presented in the manuscript, model runs were deployed in batch fashion on an HPC using the Slurm workload manager. A customized job script (icom_batch_CEUS2023.txt) and modified Python script for batch simulation (abm_baltimore_example_PIC_slurm_CEUS2023.py) are provided in the github repo.
 
-__4.__ A successful model run results in a set of output files at the block group (e.g., "results_utility_") and at the agent level (e.g., "hh_results_utility_").
+__4.__ A successful model run results in a set of output csv files at the block group (e.g., "results_utility_") and at the household agent level (e.g., "hh_results_utility_").
 
-__5.__ The model outputs from step 4 above are processed through various segments of the "post_processing_examples_CEUS2023.py" file to generate the figures for Figures 2-4 of the manuscript. The figures generated via the script are subsequently touched up in Inkscape for final publication.
+__5.__ The model outputs from step 4 above are processed through various segments of the "post_processing_examples_CEUS2023.py" file to generate Figures 2-4 of the manuscript. The figures generated via the script are touched up in Inkscape for final publication.
 
 __6.__ The agent level outputs are processed through Raw Graphs (https://app.rawgraphs.io/) to generate the alluvial diagrams in Figure 5. Final touch-ups are implemented in Inkscape.
